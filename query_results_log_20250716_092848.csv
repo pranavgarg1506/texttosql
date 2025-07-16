@@ -1,0 +1,169 @@
+timestamp,query,generated_sql,error,advisor_id,advisor_name,firm_name,advisor_status,transaction_id,date,sales_amt,product_bought
+2025-07-16T09:28:51.115450,What is the total ETF sales amount for each advisor in Q1 2025?,"SELECT
+  T1.advisor_name,
+  SUM(T2.sales_amt)
+FROM FinancialAdvisor AS T1
+INNER JOIN AdvisorTransaction AS T2
+  ON T1.advisor_id = T2.advisor_id
+WHERE
+  T2.product_bought = 'ETF' AND T2.date LIKE '2025-01%'
+GROUP BY
+  T1.advisor_name;",,,Alice Smith,,,,,,
+2025-07-16T09:28:51.115523,What is the total ETF sales amount for each advisor in Q1 2025?,"SELECT
+  T1.advisor_name,
+  SUM(T2.sales_amt)
+FROM FinancialAdvisor AS T1
+INNER JOIN AdvisorTransaction AS T2
+  ON T1.advisor_id = T2.advisor_id
+WHERE
+  T2.product_bought = 'ETF' AND T2.date LIKE '2025-01%'
+GROUP BY
+  T1.advisor_name;",,,Bob Johnson,,,,,,
+2025-07-16T09:28:51.115553,What is the total ETF sales amount for each advisor in Q1 2025?,"SELECT
+  T1.advisor_name,
+  SUM(T2.sales_amt)
+FROM FinancialAdvisor AS T1
+INNER JOIN AdvisorTransaction AS T2
+  ON T1.advisor_id = T2.advisor_id
+WHERE
+  T2.product_bought = 'ETF' AND T2.date LIKE '2025-01%'
+GROUP BY
+  T1.advisor_name;",,,Carol Patel,,,,,,
+2025-07-16T09:28:51.115578,What is the total ETF sales amount for each advisor in Q1 2025?,"SELECT
+  T1.advisor_name,
+  SUM(T2.sales_amt)
+FROM FinancialAdvisor AS T1
+INNER JOIN AdvisorTransaction AS T2
+  ON T1.advisor_id = T2.advisor_id
+WHERE
+  T2.product_bought = 'ETF' AND T2.date LIKE '2025-01%'
+GROUP BY
+  T1.advisor_name;",,,David Lee,,,,,,
+2025-07-16T09:28:53.469017,How much total Mutual Fund was sold by advisors from UBS in February 2025?,SELECT SUM(T1.sales_amt) FROM AdvisorTransaction AS T1 INNER JOIN FinancialAdvisor AS T2 ON T1.advisor_id = T2.advisor_id WHERE T2.firm_name = 'UBS' AND T1.product_bought = 'Mutual Fund' AND T1.date LIKE '2025-02%',,,,,,,,,
+2025-07-16T09:28:55.836667,Show the total sales amount grouped by product type in Q1 2025.,"SELECT
+  product_bought,
+  SUM(sales_amt)
+FROM AdvisorTransaction
+WHERE
+  STRFTIME('%Y', DATE) = '2025' AND STRFTIME('%m', DATE) BETWEEN '01' AND '03'
+GROUP BY
+  product_bought;",,,,,,,,,ETF
+2025-07-16T09:28:55.836745,Show the total sales amount grouped by product type in Q1 2025.,"SELECT
+  product_bought,
+  SUM(sales_amt)
+FROM AdvisorTransaction
+WHERE
+  STRFTIME('%Y', DATE) = '2025' AND STRFTIME('%m', DATE) BETWEEN '01' AND '03'
+GROUP BY
+  product_bought;",,,,,,,,,Mutual Fund
+2025-07-16T09:28:58.284978,List the top 3 advisors by total sales amount in 2025.,"SELECT
+  T1.advisor_name
+FROM FinancialAdvisor AS T1
+INNER JOIN AdvisorTransaction AS T2
+  ON T1.advisor_id = T2.advisor_id
+WHERE
+  STRFTIME('%Y', T2.date) = '2025'
+GROUP BY
+  T1.advisor_name
+ORDER BY
+  SUM(T2.sales_amt) DESC
+LIMIT 3;",,,Alice Smith,,,,,,
+2025-07-16T09:28:58.285059,List the top 3 advisors by total sales amount in 2025.,"SELECT
+  T1.advisor_name
+FROM FinancialAdvisor AS T1
+INNER JOIN AdvisorTransaction AS T2
+  ON T1.advisor_id = T2.advisor_id
+WHERE
+  STRFTIME('%Y', T2.date) = '2025'
+GROUP BY
+  T1.advisor_name
+ORDER BY
+  SUM(T2.sales_amt) DESC
+LIMIT 3;",,,David Lee,,,,,,
+2025-07-16T09:28:58.285087,List the top 3 advisors by total sales amount in 2025.,"SELECT
+  T1.advisor_name
+FROM FinancialAdvisor AS T1
+INNER JOIN AdvisorTransaction AS T2
+  ON T1.advisor_id = T2.advisor_id
+WHERE
+  STRFTIME('%Y', T2.date) = '2025'
+GROUP BY
+  T1.advisor_name
+ORDER BY
+  SUM(T2.sales_amt) DESC
+LIMIT 3;",,,Carol Patel,,,,,,
+2025-07-16T09:29:00.875389,Which advisor had the highest ETF sales in January 2025?,"SELECT
+  T1.advisor_name
+FROM FinancialAdvisor AS T1
+INNER JOIN AdvisorTransaction AS T2
+  ON T1.advisor_id = T2.advisor_id
+WHERE
+  STRFTIME('%Y', T2.date) = '2025' AND STRFTIME('%m', T2.date) = '01' AND T2.product_bought = 'ETF'
+GROUP BY
+  T1.advisor_name
+ORDER BY
+  SUM(T2.sales_amt) DESC
+LIMIT 1;",,,Alice Smith,,,,,,
+2025-07-16T09:29:03.198668,What is the total sales by each firm in 2025?,"SELECT
+  T1.firm_name,
+  SUM(T2.sales_amt)
+FROM FinancialAdvisor AS T1
+INNER JOIN AdvisorTransaction AS T2
+  ON T1.advisor_id = T2.advisor_id
+WHERE
+  STRFTIME('%Y', T2.date) = '2025'
+GROUP BY
+  T1.firm_name;",,,,LPL,,,,,
+2025-07-16T09:29:03.198745,What is the total sales by each firm in 2025?,"SELECT
+  T1.firm_name,
+  SUM(T2.sales_amt)
+FROM FinancialAdvisor AS T1
+INNER JOIN AdvisorTransaction AS T2
+  ON T1.advisor_id = T2.advisor_id
+WHERE
+  STRFTIME('%Y', T2.date) = '2025'
+GROUP BY
+  T1.firm_name;",,,,UBS,,,,,
+2025-07-16T09:29:03.198785,What is the total sales by each firm in 2025?,"SELECT
+  T1.firm_name,
+  SUM(T2.sales_amt)
+FROM FinancialAdvisor AS T1
+INNER JOIN AdvisorTransaction AS T2
+  ON T1.advisor_id = T2.advisor_id
+WHERE
+  STRFTIME('%Y', T2.date) = '2025'
+GROUP BY
+  T1.firm_name;",,,,Wells Fargo,,,,,
+2025-07-16T09:29:05.443041,Show the total Mutual Fund sales by active advisors only.,SELECT SUM(T1.sales_amt) FROM AdvisorTransaction AS T1 INNER JOIN FinancialAdvisor AS T2 ON T1.advisor_id = T2.advisor_id WHERE T1.product_bought = 'Mutual Fund' AND T2.advisor_status = 'Active',,,,,,,,,
+2025-07-16T09:29:07.599016,How many transactions were made by inactive advisors?,SELECT COUNT(T2.AdvisorTransaction_id) FROM FinancialAdvisor AS T1 INNER JOIN AdvisorTransaction AS T2 ON T1.advisor_id = T2.advisor_id WHERE T1.advisor_status = 'Inactive',,,,,,,,,
+2025-07-16T09:29:09.855711,"List the firms that have advisors with over ₹100,000 in ETF sales.",SELECT DISTINCT T1.firm_name FROM FinancialAdvisor AS T1 INNER JOIN AdvisorTransaction AS T2 ON T1.advisor_id = T2.advisor_id WHERE T2.product_bought = 'ETF' AND T2.sales_amt > 100000,,,,UBS,,,,,
+2025-07-16T09:29:09.855795,"List the firms that have advisors with over ₹100,000 in ETF sales.",SELECT DISTINCT T1.firm_name FROM FinancialAdvisor AS T1 INNER JOIN AdvisorTransaction AS T2 ON T1.advisor_id = T2.advisor_id WHERE T2.product_bought = 'ETF' AND T2.sales_amt > 100000,,,,LPL,,,,,
+2025-07-16T09:29:14.587064,What are the total sales on each day in January 2025?,"SELECT SUM(sales_amt), DATE(date) FROM AdvisorTransaction WHERE STRFTIME('%Y', date) = '2025' AND STRFTIME('%m', date) = '01' GROUP BY DATE(date)",,,,,,,,,
+2025-07-16T09:29:14.587136,What are the total sales on each day in January 2025?,"SELECT SUM(sales_amt), DATE(date) FROM AdvisorTransaction WHERE STRFTIME('%Y', date) = '2025' AND STRFTIME('%m', date) = '01' GROUP BY DATE(date)",,,,,,,,,
+2025-07-16T09:29:14.587171,What are the total sales on each day in January 2025?,"SELECT SUM(sales_amt), DATE(date) FROM AdvisorTransaction WHERE STRFTIME('%Y', date) = '2025' AND STRFTIME('%m', date) = '01' GROUP BY DATE(date)",,,,,,,,,
+2025-07-16T09:29:14.587201,What are the total sales on each day in January 2025?,"SELECT SUM(sales_amt), DATE(date) FROM AdvisorTransaction WHERE STRFTIME('%Y', date) = '2025' AND STRFTIME('%m', date) = '01' GROUP BY DATE(date)",,,,,,,,,
+2025-07-16T09:29:16.923882,How many transactions occurred in Q1 2025 per product?,"SELECT
+  product_bought,
+  COUNT(AdvisorTransaction_id)
+FROM AdvisorTransaction
+WHERE
+  STRFTIME('%Y', date) = '2025' AND STRFTIME('%m', date) BETWEEN '01' AND '03'
+GROUP BY
+  product_bought;",,,,,,,,,ETF
+2025-07-16T09:29:16.923971,How many transactions occurred in Q1 2025 per product?,"SELECT
+  product_bought,
+  COUNT(AdvisorTransaction_id)
+FROM AdvisorTransaction
+WHERE
+  STRFTIME('%Y', date) = '2025' AND STRFTIME('%m', date) BETWEEN '01' AND '03'
+GROUP BY
+  product_bought;",,,,,,,,,Mutual Fund
+2025-07-16T09:29:19.071292,Show a breakdown of sales by month and product type.,"SELECT strftime('%Y-%m', DATE) AS sales_month, product_bought, SUM(sales_amt) FROM AdvisorTransaction GROUP BY sales_month, product_bought",,,,,,,,,ETF
+2025-07-16T09:29:19.071450,Show a breakdown of sales by month and product type.,"SELECT strftime('%Y-%m', DATE) AS sales_month, product_bought, SUM(sales_amt) FROM AdvisorTransaction GROUP BY sales_month, product_bought",,,,,,,,,ETF
+2025-07-16T09:29:19.071483,Show a breakdown of sales by month and product type.,"SELECT strftime('%Y-%m', DATE) AS sales_month, product_bought, SUM(sales_amt) FROM AdvisorTransaction GROUP BY sales_month, product_bought",,,,,,,,,Mutual Fund
+2025-07-16T09:29:21.426449,What is the average transaction size per advisor in February 2025?,"SELECT AVG(sales_amt) FROM AdvisorTransaction WHERE STRFTIME('%Y', DATE) = '2025' AND STRFTIME('%m', DATE) = '02';",,,,,,,,,
+2025-07-16T09:29:23.679929,"Which products were bought on or after March 1st, 2025?","SELECT DISTINCT
+  product_bought
+FROM AdvisorTransaction
+WHERE
+  date >= '2025-03-01';",,,,,,,,,Mutual Fund
